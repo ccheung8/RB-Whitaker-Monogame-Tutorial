@@ -17,6 +17,9 @@ namespace Using_3D_Models
         // 45deg fov, default aspect ratio for monogame, near clipping plane of 0.1f, far clipping plane of 100f
         private Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.1f, 100f);
 
+        private Vector3 position;   // position of our model
+        private float angle;        // angle of our model
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -35,6 +38,10 @@ namespace Using_3D_Models
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            position = new Vector3(0, 0, 0);    // initializes position at origin
+
+            angle = 0;
+
             model = Content.Load<Model>("Ship");
         }
 
@@ -43,7 +50,9 @@ namespace Using_3D_Models
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            angle -= 0.03f; // adds 0.03 units of angle
+            position -= new Vector3(0, 0.01f, 0);    // move object 0.01 unit in the y direction every update
+            world = Matrix.CreateRotationY(angle) * Matrix.CreateTranslation(position); //updates world matrix to rotate around Y then translate
 
             base.Update(gameTime);
         }
