@@ -23,9 +23,10 @@ namespace WindowSize
 
         protected override void Initialize()
         {
-            // runs the game in fullscreen
+            // sets preffered width and height to screen size
             _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            // runs the game in fullscreen
             _graphics.IsFullScreen = true;
             _graphics.HardwareModeSwitch = false;   // windowed borderless
             _graphics.ApplyChanges();
